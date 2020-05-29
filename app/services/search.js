@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { perPage } from '../../config/app';
+import { perPage, githubToken } from '../../config/app';
 
 const github = axios.create({
   baseURL: 'https://api.github.com/',
 });
 
-github.defaults.headers.common.Authorization = `token ${process.env.GITHUB_TOKEN}`;
+github.defaults.headers.common.Authorization = `token ${githubToken}`;
 
 export default () => {
   return {
