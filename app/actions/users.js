@@ -70,3 +70,43 @@ export function getUserDetails(username) {
             });
     };
 }
+
+function addUserRepos(payload) {
+    return {
+        type: types.USER_DETAIL,
+        payload,
+    };
+}
+
+export function getUserRepos(username) {
+    return (dispatch) => {
+        dispatch(beginGetDetail());
+
+        return searchService().getUserRepos(username).then(response => {
+            const { data } = response;
+            dispatch(addUserRepos({ repos: data }));
+        })
+            .catch(() => {
+            });
+    };
+}
+
+function addUserFollowers(payload) {
+    return {
+        type: types.USER_FOLLOWERS,
+        payload,
+    };
+}
+
+export function getUserFollowers(username) {
+    return (dispatch) => {
+        dispatch(beginGetDetail());
+
+        return searchService().getUserFollowers(username).then(response => {
+            const { data } = response;
+            dispatch(addUserFollowers({ followersList: data }));
+        })
+            .catch(() => {
+            });
+    };
+}

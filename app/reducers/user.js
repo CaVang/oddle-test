@@ -30,6 +30,9 @@ const searchString = (
 const detail = (state = {}, action) => {
   switch (action.type) {
     case types.USER_DETAIL:
+    case types.USER_REPOS:
+      return { ...state, searching: false, ...action.payload };
+    case types.USER_FOLLOWERS:
       return { ...state, searching: false, ...action.payload };
     case types.USER_DETAIL_START:
       return { ...state, searching: true };

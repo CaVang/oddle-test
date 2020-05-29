@@ -13,5 +13,7 @@ export default () => {
       params: { per_page: perPage, q, page },
     }),
     getUserDetail: (username) => github.get(`/users/${username}`),
+    getUserRepos: (username) => github.get(`/users/${username}/repos`),
+    getUserFollowers: (username) => github.get(`/users/${username}/followers`),
   };
 };

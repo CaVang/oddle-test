@@ -6,3 +6,5 @@ export const SEARCH_USER_SUCCESS = 'SEARCH_USER_SUCCESS';
 
 export const USER_DETAIL_START = 'USER_DETAIL_START';
 export const USER_DETAIL = 'USER_DETAIL';
+export const USER_REPOS = 'USER_REPOS';
+export const USER_FOLLOWERS = 'USER_FOLLOWERS';
