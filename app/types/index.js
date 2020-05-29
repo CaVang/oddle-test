@@ -1,0 +1,8 @@
+export const TYPING = 'TYPING';
+
+export const TOGGLE_LOGIN_MODE = 'TOGGLE_LOGIN_MODE';
+export const SEARCH_USER_START = 'SEARCH_USER_START';
+export const SEARCH_USER_SUCCESS = 'SEARCH_USER_SUCCESS';
+
+export const USER_DETAIL_START = 'USER_DETAIL_START';
+export const USER_DETAIL = 'USER_DETAIL';
