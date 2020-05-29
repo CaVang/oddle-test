@@ -10,7 +10,8 @@ module.exports = ({ production = false, browser = false } = {}) => {
     return [
       new webpack.EnvironmentPlugin(['NODE_ENV']),
       new webpack.DefinePlugin(compileTimeConstantForMinification),
-      new webpack.BannerPlugin(bannerOptions)
+      new webpack.BannerPlugin(bannerOptions),
+      new webpack.EnvironmentPlugin(['GITHUB_TOKEN']),
     ];
   }
   if (!production && browser) {
@@ -18,6 +19,7 @@ module.exports = ({ production = false, browser = false } = {}) => {
       new webpack.EnvironmentPlugin(['NODE_ENV']),
       new webpack.DefinePlugin(compileTimeConstantForMinification),
       new webpack.HotModuleReplacementPlugin(),
+      new webpack.EnvironmentPlugin(['GITHUB_TOKEN']),
     ];
   }
   if (production && !browser) {
@@ -25,6 +27,7 @@ module.exports = ({ production = false, browser = false } = {}) => {
       new webpack.EnvironmentPlugin(['NODE_ENV']),
       new webpack.DefinePlugin(compileTimeConstantForMinification),
       new webpack.BannerPlugin(bannerOptions),
+      new webpack.EnvironmentPlugin(['GITHUB_TOKEN']),
     ];
   }
   if (production && browser) {
@@ -38,7 +41,8 @@ module.exports = ({ production = false, browser = false } = {}) => {
       new ManifestPlugin({
         fileName: 'manifest.json',
         publicPath: ''
-      })
+      }),
+      new webpack.EnvironmentPlugin(['GITHUB_TOKEN']),
     ];
   }
   return [];
