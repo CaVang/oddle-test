@@ -5,7 +5,7 @@ const github = axios.create({
   baseURL: 'https://api.github.com/',
 });
 
-github.defaults.headers.common.Authorization = `token bf9ef54806ada2c3eaf223d185b19ddacdda2230`;
+github.defaults.headers.common.Authorization = `token ${process.env.GITHUB_TOKEN}`;
 
 export default () => {
   return {
