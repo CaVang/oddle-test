@@ -7,3 +7,5 @@ compiled
 *.swp
 .vscode
 .env
+yarn.lock
+package.lock
