@@ -1,9 +1,9 @@
 import React from 'react';
-import { getUserDetails, getUserRepos, getUserFollowers } from '../actions/redirectPage';
 import { Content, MetaData, GridItemRepos, ListData, GridItemTitle, ListItem, RepoHeader, RepoName, RepoFork, RepoBody, RepoFooter, RepoFooterStar, RepoFooterFork, RepoLastPush, GridItemFollowers, FollowerItem, FollowerAvatar, Avatar } from '../css/components/about';
 import qs from 'query-string';
 import { connect } from "react-redux";
 import Loader from "../components/Loader";
+import * as types from "../types";
 
 function treatAsUTC(date) {
     const result = new Date(date);
@@ -20,15 +20,6 @@ class About extends React.Component {
     componentDidMount() {
         const queryParams = qs.parse(this.props.location.search);
         this.props.getUserDetails(queryParams.username);
-    }
-
-    componentWillReceiveProps(nextProps) {
-        const { user } = this.props;
-        const { user: userNextProps } = nextProps;
-        if (user.detail && userNextProps.detail && user.detail.login !== userNextProps.detail.login) {
-            this.props.getUserRepos(userNextProps.detail.login);
-            this.props.getUserFollowers(userNextProps.detail.login);
-        }
     }
 
     render() {
@@ -106,10 +97,13 @@ const mapState = state => ({
     user: state.user,
 });
 
-const mapDispatch = {
-    getUserDetails,
-    getUserRepos,
-    getUserFollowers,
-};
+const mapDispatch = (dispatch) => ({
+    getUserDetails(userName) {
+        dispatch({
+            type: types.USER_DETAIL_ASYNC.PENDING,
+            userName,
+        });
+    },
+});
 
 export default (connect(mapState, mapDispatch)(About));

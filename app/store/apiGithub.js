@@ -33,8 +33,8 @@ function searchUsers(params) {
         .then(addPagination);
 }
 
-function getProfile(username) {
-    return github.get(`/users/${username}`);
+function getProfile({ userName, uri }) {
+    return github.get(`/users/${userName}${uri ? `/${uri}` : ''}`).then(response => response.data);
 }
 
 export default {

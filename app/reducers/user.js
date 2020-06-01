@@ -34,25 +34,6 @@ const searchString = createReducer({}, {
 });
 
 const detail = createReducer({}, {
-  [types.USER_REPOS_ASYNC.PENDING](state) {
-    return {
-      ...state,
-      searching: true
-    }
-  },
-  [types.USER_REPOS_ASYNC.SUCCESS](state, action) {
-    return {
-      ...state,
-      ...action.payload,
-      searching: false
-    }
-  },
-  [types.USER_REPOS_ASYNC.ERROR](state) {
-    return {
-      ...state,
-      searching: false
-    }
-  },
   [types.USER_DETAIL_ASYNC.PENDING](state) {
     return {
       ...state,
@@ -72,25 +53,6 @@ const detail = createReducer({}, {
       searching: false
     }
   },
-  [types.USER_FOLLOWERS_ASYNC.PENDING](state) {
-    return {
-      ...state,
-      searching: true
-    }
-  },
-  [types.USER_FOLLOWERS_ASYNC.SUCCESS](state, action) {
-    return {
-      ...state,
-      ...action.payload,
-      searching: false
-    }
-  },
-  [types.USER_FOLLOWERS_ASYNC.ERROR](state) {
-    return {
-      ...state,
-      searching: false
-    }
-  }
 });
 
 const userReducer = combineReducers({ users, searchString, detail });
