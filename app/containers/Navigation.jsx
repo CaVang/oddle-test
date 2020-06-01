@@ -1,28 +1,43 @@
 import React from 'react';
 import { NavigationStyle, Logo, NavigationInner } from '../css/components/navigation';
-import { redirectPage, typing } from "../actions/users";
+import { redirectPage } from "../actions/redirectPage";
 import EntryBox from "../components/EntryBox";
-import { useDispatch, useSelector } from "react-redux";
+import { connect, } from "react-redux";
+import * as types from "../types";
 
-const Navigation = () => {
-    const { searchString } = useSelector((state) => state.user);
-    const dispatch = useDispatch();
+class Navigation extends React.Component {
+    render() {
+        const { searchString } = this.props;
 
-    const dispatchTyping = (data) => dispatch(typing(data));
-    const dispatchCreateTopic = (q) => dispatch(redirectPage({ q }));
+        return (
+            <NavigationStyle>
+                <NavigationInner role="navigation">
+                    <Logo to="/" activeClassName="active">Home</Logo>
+                    <EntryBox
+                        searchString={searchString}
+                        onEntryChange={data => this.props.typing(data)}
+                        onEntrySave={q => this.props.redirect({ q })}
+                    />
+                </NavigationInner>
+            </NavigationStyle>
+        );
+    }
+}
 
-    return (
-        <NavigationStyle>
-            <NavigationInner role="navigation">
-                <Logo to="/" activeClassName="active">Home</Logo>
-                <EntryBox
-                    topic={searchString}
-                    onEntryChange={dispatchTyping}
-                    onEntrySave={dispatchCreateTopic}
-                />
-            </NavigationInner>
-        </NavigationStyle>
-    );
-};
+const mapState = state => ({
+    searchString: state.user.searchString.data,
+});
 
-export default Navigation;
+const mapDispatch = (dispatch) => ({
+    typing(searchString) {
+        dispatch({
+            type: types.TYPING_ASYNC.PENDING,
+            searchString,
+        });
+    },
+    redirect(params) {
+        dispatch(redirectPage(params));
+    },
+});
+
+export default (connect(mapState, mapDispatch)(Navigation));

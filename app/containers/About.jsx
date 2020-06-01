@@ -1,5 +1,5 @@
 import React from 'react';
-import { getUserDetails, getUserRepos, getUserFollowers } from '../actions/users';
+import { getUserDetails, getUserRepos, getUserFollowers } from '../actions/redirectPage';
 import { Content, MetaData, GridItemRepos, ListData, GridItemTitle, ListItem, RepoHeader, RepoName, RepoFork, RepoBody, RepoFooter, RepoFooterStar, RepoFooterFork, RepoLastPush, GridItemFollowers, FollowerItem, FollowerAvatar, Avatar } from '../css/components/about';
 import qs from 'query-string';
 import { connect } from "react-redux";

@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 
 import { EntryBoxWrapper, Input } from '../css/components/entrybox';
 
-const EntryBox = ({ onEntryChange, onEntrySave, topic }) => {
+const EntryBox = ({ onEntryChange, onEntrySave, searchString }) => {
     return (
         <EntryBoxWrapper>
             <Input
-                value={topic}
+                value={searchString}
                 placeholder="Type and Enter to Search"
                 onEntryChange={onEntryChange}
                 onEntrySave={onEntrySave} />

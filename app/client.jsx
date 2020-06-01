@@ -58,7 +58,7 @@ class PendingNavDataLoader extends Component {
   render() {
     const { children, location } = this.props;
     const { previousLocation } = this.state;
-console.log(location);
+
     // use a controlled <Route> to trick all descendants into
     // rendering the old location
     return (

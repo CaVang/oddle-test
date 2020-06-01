@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { Results, Item } from '../css/components/home';
-import { searchUsers } from "../actions/users";
+import * as types from '../types';
 import qs from 'query-string';
 
 import UserCard from "../components/UserCard";
@@ -9,10 +9,15 @@ import Loader from '../components/Loader';
 import Pagination from "../components/Pagination";
 
 class Home extends React.Component {
+    componentDidMount() {
+        if (this.props.location.search) {
+            this.props.searchForUser(qs.parse(this.props.location.search));
+        }
+    }
+
     componentWillReceiveProps(nextProps) {
-        const queryParams = qs.parse(nextProps.location.search)
-        if (this.props.location.search !== nextProps.location.search && queryParams.q) {
-            this.props.searchUsers(qs.parse(nextProps.location.search));
+        if (this.props.location.search !== nextProps.location.search) {
+            this.props.searchForUser(qs.parse(nextProps.location.search));
         }
     }
 
@@ -53,8 +58,15 @@ const mapState = state => ({
     user: state.user,
 });
 
-const mapDispatch = {
-    searchUsers,
-};
+const mapDispatch = (dispatch) => ({
+    searchForUser(search) {
+        dispatch({
+            type: types.SEARCH_USER_ASYNC.PENDING,
+            payload: {
+                search,
+            },
+        });
+    },
+});
 
 export default (connect(mapState, mapDispatch)(Home));

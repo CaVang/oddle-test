@@ -1,45 +1,97 @@
 import { combineReducers } from 'redux';
 import * as types from '../types';
+import { createReducer } from '../store/utilities'
 
-const users = (
-    state = {},
-    action
-) => {
-  switch (action.type) {
-    case types.SEARCH_USER_START:
-      return { ...state, searching: true };
-    case types.SEARCH_USER_SUCCESS:
-      return { ...state, searching: false, ...action.payload };
-    default:
-      return state;
+const users = createReducer({}, {
+  [types.SEARCH_USER_ASYNC.PENDING](state) {
+    return {
+      ...state,
+      searching: true
+    }
+  },
+  [types.SEARCH_USER_ASYNC.SUCCESS](state, action) {
+    return {
+      ...state,
+      ...action.payload,
+      searching: false
+    }
+  },
+  [types.SEARCH_USER_ASYNC.ERROR](state) {
+    return {
+      ...state,
+      searching: false
+    }
   }
-};
+});
 
-const searchString = (
-    state = '',
-    action
-) => {
-  switch (action.type) {
-    case types.TYPING:
-      return action.searchString;
-    default:
-      return state;
+const searchString = createReducer({}, {
+  [types.TYPING_ASYNC.SUCCESS](state, action) {
+    return {
+      ...state,
+      data: action.searchString
+    }
   }
-};
+});
 
-const detail = (state = {}, action) => {
-  switch (action.type) {
-    case types.USER_DETAIL:
-    case types.USER_REPOS:
-      return { ...state, searching: false, ...action.payload };
-    case types.USER_FOLLOWERS:
-      return { ...state, searching: false, ...action.payload };
-    case types.USER_DETAIL_START:
-      return { ...state, searching: true };
-    default:
-      return state;
+const detail = createReducer({}, {
+  [types.USER_REPOS_ASYNC.PENDING](state) {
+    return {
+      ...state,
+      searching: true
+    }
+  },
+  [types.USER_REPOS_ASYNC.SUCCESS](state, action) {
+    return {
+      ...state,
+      ...action.payload,
+      searching: false
+    }
+  },
+  [types.USER_REPOS_ASYNC.ERROR](state) {
+    return {
+      ...state,
+      searching: false
+    }
+  },
+  [types.USER_DETAIL_ASYNC.PENDING](state) {
+    return {
+      ...state,
+      searching: true
+    }
+  },
+  [types.USER_DETAIL_ASYNC.SUCCESS](state, action) {
+    return {
+      ...state,
+      ...action.payload,
+      searching: false
+    }
+  },
+  [types.USER_DETAIL_ASYNC.ERROR](state) {
+    return {
+      ...state,
+      searching: false
+    }
+  },
+  [types.USER_FOLLOWERS_ASYNC.PENDING](state) {
+    return {
+      ...state,
+      searching: true
+    }
+  },
+  [types.USER_FOLLOWERS_ASYNC.SUCCESS](state, action) {
+    return {
+      ...state,
+      ...action.payload,
+      searching: false
+    }
+  },
+  [types.USER_FOLLOWERS_ASYNC.ERROR](state) {
+    return {
+      ...state,
+      searching: false
+    }
   }
-}
+});
 
 const userReducer = combineReducers({ users, searchString, detail });
 
