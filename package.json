@@ -7,7 +7,7 @@
   "scripts": {
     "clean": "rimraf public && rimraf compiled",
     "start": "npm run build && cross-env NODE_ENV=production node compiled/server.js",
-    "dev": "cross-env NODE_ENV=development GITHUB_TOKEN=efc5597655fb13cd5cec4108cd1b9131f63ce5cf nodemon",
+    "dev": "cross-env NODE_ENV=development nodemon",
     "build:dev": "cross-env NODE_ENV=development npm run webpack -- --env.server",
     "build": "npm run clean && cross-env NODE_ENV=production npm run webpack -- --env.browser && cross-env NODE_ENV=production npm run webpack -- --env.server",
     "webpack": "webpack --colors --display-error-details --config ./webpack/webpack.config.js"
