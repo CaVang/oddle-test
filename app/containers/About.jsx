@@ -76,7 +76,7 @@ class About extends React.Component {
                         <ListData>
                             {
                                 followersList && followersList.map((follower, key) => <ListItem key={key}>
-                                    <FollowerItem href={follower.url}>
+                                    <FollowerItem href={`/user?username=${follower.login}`}>
                                         <FollowerAvatar>
                                             <Avatar src={follower['avatar_url']} width={90}/>
                                         </FollowerAvatar>
